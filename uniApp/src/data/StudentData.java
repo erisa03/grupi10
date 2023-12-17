@@ -98,6 +98,20 @@ public class StudentData {
 		}
 		return student;
 	}
+
+	public static int getStudentID(Student student) throws SQLException {
+		
+		String query = "SELECT * FROM users WHERE name = '" + student.getName() + "'";
+		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test?useSSl=false", "root", "");
+		int studentID = 0;
+		PreparedStatement preparedStatement = con.prepareStatement(query);
+		ResultSet resultSet = preparedStatement.executeQuery();
+		if (resultSet.next()) {
+			studentID = resultSet.getInt("id");
+		}
+
+		return studentID;
+	}
 	
 	public static String getUsername() {
 		return username;
