@@ -6,22 +6,13 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-
 import java.awt.Color;
 import java.awt.Font;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
-
-import java.awt.Component;
-
-import org.w3c.dom.events.MouseEvent;
-
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import course.Course;
 import student.Student;
-@SuppressWarnings("unused")
+
 public class CoursesWindow extends JFrame {
 
 	private static final long serialVersionUID = 1L;

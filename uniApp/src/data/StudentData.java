@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import course.Course;
 import exceptionHandler.*;
 import student.Student;
 
@@ -135,7 +137,7 @@ public class StudentData {
 		}
 		
 		final Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test?useSSl=false", "root", "");
-		try (con) {
+		try  {
 			String sql = "DELETE FROM courses WHERE user_id = ?";
 			try (PreparedStatement deleteStatement = con.prepareStatement(sql)) {
 				deleteStatement.setInt(1, StudentId);

@@ -26,11 +26,8 @@ public class StudentEnrollmentInCourse {
 	}
 	
 	public static void dropStudentFromCourse(Course course, Student student) throws SQLException {
-		CourseData courseData = new CourseData();
 		try {
-			if (!courseData.isAvailabe(course)) {
-				JOptionPane.showMessageDialog(null, "You can not drop from this course!");
-			} else if (!StudentData.isEnrolled(student, course)) {
+			if (!StudentData.isEnrolled(student, course)) {
 				JOptionPane.showMessageDialog(null, "You are not registered in this course!");
 			} else {
 				StudentData.dropStudentFromCourse(course, student);;
