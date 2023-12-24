@@ -99,6 +99,59 @@ public class StudentData {
 		return student;
 	}
 
+	public static void addStudentInCourse(Course course, Student student) throws SQLException {
+		
+		int studentId = StudentData.getStudentID(student);
+		final Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test?useSSl=false", "root", "");
+		int r;
+		do {
+			final String sql = "INSERT INTO courses VALUES(?,?,?,?,?,?,?,?,?)";
+			final PreparedStatement preparedStatement = con.prepareStatement(sql);
+			preparedStatement.setInt(1, 0);
+			preparedStatement.setString(2, course.getName());
+			preparedStatement.setString(3, course.getLecturer());
+			preparedStatement.setTime(4, course.getTime());
+			preparedStatement.setString(5, course.getLocation());
+			preparedStatement.setInt(6, course.getNumberOfStudents() + 1);
+			preparedStatement.setDouble(7, course.getAverageRate());
+			preparedStatement.setString(8, course.getDescription());
+			preparedStatement.setInt(9, studentId);
+			r = preparedStatement.executeUpdate();
+		} while (r == 0);
+		final String sql = "UPDATE courses SET studentNo= '" + (course.getNumberOfStudents() + 1) + "' WHERE name='"
+				+ course.getName() + "'";
+		final PreparedStatement preparedStatement = con.prepareStatement(sql);
+		preparedStatement.executeUpdate();
+		con.close();
+	}
+	
+	public static void dropStudentFromCourse(Course course, Student student) throws SQLException {
+
+		int StudentId = StudentData.getStudentID(student);
+		
+		if ( !isEnrolled ( student, course)) {
+			System.out.println("You are not enrolled in this course!");
+			return;
+		}
+		
+		final Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test?useSSl=false", "root", "");
+		try (con) {
+			String sql = "DELETE FROM courses WHERE user_id = ?";
+			try (PreparedStatement deleteStatement = con.prepareStatement(sql)) {
+				deleteStatement.setInt(1, StudentId);
+				deleteStatement.executeUpdate();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		final String updateSql = "UPDATE courses SET studentNo=? WHERE name=?";
+		try (PreparedStatement updateStatement = con.prepareStatement(updateSql)) {
+			updateStatement.setInt(6, course.getNumberOfStudents() - 1);
+			updateStatement.setString(2, course.getName());
+			updateStatement.executeUpdate();
+		}
+	}
+	
 	public static int getStudentID(Student student) throws SQLException {
 		
 		String query = "SELECT * FROM users WHERE name = '" + student.getName() + "'";
@@ -111,6 +164,16 @@ public class StudentData {
 		}
 
 		return studentID;
+	}
+	
+	public static boolean isEnrolled(Student student, Course course) throws SQLException {
+		
+		String query = "SELECT * FROM courses WHERE user_id = '" + StudentData.getStudentID(student) + "' AND name= '"
+				+ course.getName() + "'";
+		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test?useSSl=false", "root", "");
+		PreparedStatement preparedStatement = con.prepareStatement(query);
+		ResultSet resultSet = preparedStatement.executeQuery();
+		return resultSet.next();
 	}
 	
 	public static String getUsername() {

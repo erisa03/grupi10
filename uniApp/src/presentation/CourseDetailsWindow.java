@@ -86,7 +86,14 @@ public class CourseDetailsWindow extends JFrame {
 		btnDropButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+				int confirm = JOptionPane.showConfirmDialog(null, "Do you want to drop out from this course?");
+				if (confirm == 0) {
+					try {
+						StudentEnrollmentInCourse.dropStudentFromCourse(course, student);
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+				}
 			}
 		});
 		btnDropButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
