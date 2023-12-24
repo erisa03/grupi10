@@ -120,7 +120,18 @@ public class CourseDetailsWindow extends JFrame {
 		leaveFeedbackBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				//new OrderedFeedbacksWindow();
+				try {
+					if(!student.isEnrolled(course)) {
+						JOptionPane.showMessageDialog(null, "You need to register in this course to leave feedback!");						
+					}
+					else if(student.hasLeftFeedback(course)) 
+						JOptionPane.showMessageDialog(null, "You have already left a feedback in this course!");					
+					else
+						new FeedbackWindow(course, student);
+					dispose();
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
 		
