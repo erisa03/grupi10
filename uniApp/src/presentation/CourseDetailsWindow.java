@@ -78,7 +78,14 @@ public class CourseDetailsWindow extends JFrame {
 		registerBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+				int confirm = JOptionPane.showConfirmDialog(null, "Do you want to register in this course?");
+				if(confirm == 0) {
+					try {
+						StudentEnrollmentInCourse.enrollStudentInCourse(course, student);
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+				}
 			}
 		});
 			
