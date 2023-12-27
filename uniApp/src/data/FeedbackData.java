@@ -5,14 +5,13 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 import course.*;
 
+
 public class FeedbackData {
 	public static void addFeedback(Feedback feedback, int courseID) throws Exception {
-
+	
 		final Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test?useSSl=false", "root", "");
 		int r;
 		do {
@@ -21,7 +20,7 @@ public class FeedbackData {
 			stm.setInt(1, 0);
 			stm.setString(2, feedback.getFeedbackFromStudent());
 			stm.setInt(3, feedback.getRate());
-			stm.setString(4, feedback.getDate());
+			stm.setDate(4, feedback.getDate());
 			stm.setInt(5, courseID);
 			r = stm.executeUpdate();
 		} while (r == 0);

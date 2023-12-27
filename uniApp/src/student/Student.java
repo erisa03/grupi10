@@ -4,6 +4,8 @@ import java.sql.SQLException;
 import java.util.Arrays;
 
 import course.Course;
+import data.CourseData;
+import data.FeedbackData;
 import data.StudentData;
 
 public class Student {
@@ -16,7 +18,13 @@ public class Student {
 	public int getID () throws SQLException {
 		return StudentData.getStudentID(this);
 	}
-
+	public boolean isEnrolled(Course course) throws Exception {
+		return StudentData.isEnrolled(this, course);
+	}
+	public boolean hasLeftFeedback(Course course) throws SQLException {
+		int courseID= CourseData.getCourseID(course, this);
+		return FeedbackData.hasLeftFeedback(courseID);
+	}
 	@Override
 	public String toString() {
 		return "Student [name=" + name + ", email=" + email + ", courses=" + Arrays.toString(courses) + "]";

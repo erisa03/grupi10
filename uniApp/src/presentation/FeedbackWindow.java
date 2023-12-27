@@ -4,8 +4,7 @@ import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.sql.Date;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -25,7 +24,6 @@ public class FeedbackWindow extends JFrame {
 	private JPanel contentPane;
 	private JTextField feedbackTextField;
 	private Feedback feedback;
-	private String todayDate;
 
 	public FeedbackWindow(Course course, Student student) {
 		setVisible(true);
@@ -106,10 +104,8 @@ public class FeedbackWindow extends JFrame {
 				
 				if (feedbackText.length() <= 1000) {
 				try {
-					Date today = new Date();
-					SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-					todayDate = formatter.format(today);
-					feedback = new Feedback(feedbackText, rate, todayDate);
+					Date today = new Date(new java.util.Date().getTime());
+					feedback = new Feedback(feedbackTextField.getText(), rate, today);
 					feedback.addFeedback(course, student);
 					dispose();
 					new CourseDetailsWindow(course, student);
