@@ -138,20 +138,27 @@ public class StudentData {
 		
 		final Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test?useSSl=false", "root", "");
 		try  {
-			String sql = "DELETE FROM courses WHERE user_id = ?";
+			String sql = "DELETE FROM courses WHERE user_id = ? AND name = ?";
 			try (PreparedStatement deleteStatement = con.prepareStatement(sql)) {
 				deleteStatement.setInt(1, StudentId);
+				deleteStatement.setString(2, course.getName());
 				deleteStatement.executeUpdate();
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		final String updateSql = "UPDATE courses SET studentNo=? WHERE name=?";
-		try (PreparedStatement updateStatement = con.prepareStatement(updateSql)) {
-			updateStatement.setInt(6, course.getNumberOfStudents() - 1);
-			updateStatement.setString(2, course.getName());
-			updateStatement.executeUpdate();
-		}
+//		final String sql = "UPDATE courses SET studentNo= '" + (course.getNumberOfStudents() - 1) + "' WHERE name='"
+//				+ course.getName() + "'";
+//		final PreparedStatement preparedStatement = con.prepareStatement(sql);
+//		preparedStatement.executeUpdate();
+//		con.close();
+		int newStudentNo = course.getNumberOfStudents() - 1;
+		final String sql = "UPDATE courses SET studentNo= ? WHERE name= ?";
+		final PreparedStatement preparedStatement = con.prepareStatement(sql);
+		preparedStatement.setInt(1, newStudentNo >= 0 ? newStudentNo : 0);
+		preparedStatement.setString(2, course.getName());
+		preparedStatement.executeUpdate();
+		con.close();
 	}
 	
 	public static int getStudentID(Student student) throws SQLException {

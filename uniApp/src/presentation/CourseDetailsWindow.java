@@ -3,8 +3,10 @@ package presentation;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.table.DefaultTableModel;
 import course.Course;
 import student.*;
@@ -26,6 +28,8 @@ public class CourseDetailsWindow extends JFrame {
 	private JTable table;
 	private Course course;
 	private Student student;
+	private JTextArea textArea;
+
 
 	public CourseDetailsWindow(Course course, Student student) {
 		this.student = student;
@@ -66,9 +70,9 @@ public class CourseDetailsWindow extends JFrame {
 		contentPane.add(table);
 		
 		JLabel title = new JLabel(course.getName());
-		title.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		title.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		title.setHorizontalAlignment(SwingConstants.CENTER);
-		title.setBounds(57, 10, 407, 45);
+		title.setBounds(56, 11, 407, 28);
 		contentPane.add(title);
 		
 		JButton registerBtn = new JButton("Register");
@@ -147,8 +151,17 @@ public class CourseDetailsWindow extends JFrame {
 		lblNewLabel.setBounds(20, 302, 406, 13);
 		contentPane.add(lblNewLabel);
 		
-		JLabel descriptionPanel = new JLabel(course.getDescription());
-		descriptionPanel.setBounds(50, 65, 417, 39);
-		contentPane.add(descriptionPanel);
+			   // Create the JTextArea
+        textArea = new JTextArea(course.getDescription());
+        textArea.setBounds(10, 42, 490, 61);
+
+        // Enable line wrap
+        textArea.setLineWrap(true);
+        textArea.setWrapStyleWord(true);
+
+        // Add the JTextArea to a JScrollPane to enable scrolling
+        JScrollPane scrollPane = new JScrollPane(textArea);
+        scrollPane.setBounds(10, 42, 490, 61);
+        contentPane.add(scrollPane);
 	}
 }
