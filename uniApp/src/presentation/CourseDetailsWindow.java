@@ -1,24 +1,26 @@
-package presentation;
+package presentation; 
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTable;
-import javax.swing.JTextArea;
 import javax.swing.table.DefaultTableModel;
 import course.Course;
+import course.Feedback;
 import student.*;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+
 import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 
 public class CourseDetailsWindow extends JFrame {
@@ -26,14 +28,8 @@ public class CourseDetailsWindow extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTable table;
-	private Course course;
-	private Student student;
-	private JTextArea textArea;
-
 
 	public CourseDetailsWindow(Course course, Student student) {
-		this.student = student;
-		this.course = course;
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 524, 352);
@@ -70,14 +66,14 @@ public class CourseDetailsWindow extends JFrame {
 		contentPane.add(table);
 		
 		JLabel title = new JLabel(course.getName());
-		title.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		title.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		title.setHorizontalAlignment(SwingConstants.CENTER);
-		title.setBounds(56, 11, 407, 28);
+		title.setBounds(57, 10, 407, 45);
 		contentPane.add(title);
 		
 		JButton registerBtn = new JButton("Register");
 		registerBtn.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		registerBtn.setBounds(271, 253, 105, 28);
+		registerBtn.setBounds(369, 253, 119, 39);
 		contentPane.add(registerBtn);
 		registerBtn.addMouseListener(new MouseAdapter() {
 			@Override
@@ -92,41 +88,25 @@ public class CourseDetailsWindow extends JFrame {
 				}
 			}
 		});
-			
-		JButton btnDropButton = new JButton("Drop Button");
-		btnDropButton.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				int confirm = JOptionPane.showConfirmDialog(null, "Do you want to drop out from this course?");
-				if (confirm == 0) {
-					try {
-						StudentEnrollmentInCourse.dropStudentFromCourse(course, student);
-					} catch (SQLException e1) {
-						e1.printStackTrace();
-					}
-				}
-			}
-		});
-		btnDropButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnDropButton.setBounds(395, 253, 105, 28);
-		contentPane.add(btnDropButton);
-		
 		
 		JButton viewFeedbacksBtn = new JButton("View feedbacks");
 		viewFeedbacksBtn.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		viewFeedbacksBtn.setBounds(10, 253, 105, 28);
+		viewFeedbacksBtn.setBounds(21, 253, 119, 39);
 		contentPane.add(viewFeedbacksBtn);
 		viewFeedbacksBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				//new OrderedFeedbacksWindow();
+				try {					
+					viewFeedbacks(course);
+				} catch (Exception ex) {
+				  ex.printStackTrace();	
+				}
 			}
 		});
 		
-		
 		JButton leaveFeedbackBtn = new JButton("Leave feedback");
 		leaveFeedbackBtn.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		leaveFeedbackBtn.setBounds(135, 253, 113, 28);
+		leaveFeedbackBtn.setBounds(188, 253, 128, 39);
 		contentPane.add(leaveFeedbackBtn);
 		leaveFeedbackBtn.addMouseListener(new MouseAdapter() {
 			@Override
@@ -151,17 +131,17 @@ public class CourseDetailsWindow extends JFrame {
 		lblNewLabel.setBounds(20, 302, 406, 13);
 		contentPane.add(lblNewLabel);
 		
-			   // Create the JTextArea
-        textArea = new JTextArea(course.getDescription());
-        textArea.setBounds(10, 42, 490, 61);
+		JLabel descriptionPanel = new JLabel(course.getDescription());
+		descriptionPanel.setBounds(50, 65, 417, 39);
+		contentPane.add(descriptionPanel);
 
-        // Enable line wrap
-        textArea.setLineWrap(true);
-        textArea.setWrapStyleWord(true);
-
-        // Add the JTextArea to a JScrollPane to enable scrolling
-        JScrollPane scrollPane = new JScrollPane(textArea);
-        scrollPane.setBounds(10, 42, 490, 61);
-        contentPane.add(scrollPane);
 	}
+	  public static void viewFeedbacks(Course course) throws Exception {
+
+	        ArrayList<Feedback> feedbacks = Feedback.getFeedbacks(course);
+	
+	        SwingUtilities.invokeLater(() -> {
+	            new ViewFeedbacksWindow(feedbacks);
+	        });
+	    }
 }
