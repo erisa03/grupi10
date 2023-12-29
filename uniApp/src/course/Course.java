@@ -13,8 +13,8 @@ public class Course {
 	private String lecturer;
 	private String description;
 	private int numberOfStudents;
-	//private ArrayList<Student> students;
 	private double averageRate;
+	private int numberOfRates;
 	private String location;
 	private Time time;
 	
@@ -102,6 +102,14 @@ public class Course {
 
 	public void setTime(Time time) {
 		this.time = time;
+	}
+
+	public int getNumberOfRates() {
+		return numberOfRates;
+	}
+
+	public void setNumberOfRates(int numberOfRates) {
+		this.numberOfRates = numberOfRates;
 	}
 
 	public boolean isAvailable() {

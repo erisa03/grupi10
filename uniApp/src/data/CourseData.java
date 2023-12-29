@@ -9,8 +9,6 @@ import java.util.ArrayList;
 import course.Course;
 import student.Student;
 
-import student.Student;
-
 public class CourseData {
     private ArrayList<Student> students;
 
@@ -68,5 +66,14 @@ public class CourseData {
 			id = resultSet.getInt("id");
 		}
 		return id;
+	}
+
+	public static void saveAverageRate(int rate, Course course) throws SQLException {
+		final Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test?useSSl=false", "root", "");
+		double newAverageRate = (course.getAverageRate() * course.getNumberOfRates() + rate) / (course.getNumberOfRates() + 1);
+		final String sql = "UPDATE courses SET rate= '" + newAverageRate + "' WHERE name='" + course.getName() + "'";
+		final PreparedStatement prepStatement = con.prepareStatement(sql);
+		prepStatement.executeUpdate();
+		con.close();
 	}
 }
