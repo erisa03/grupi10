@@ -1,10 +1,12 @@
-package presentation; 
+package presentation;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.table.DefaultTableModel;
 import course.Course;
 import course.Feedback;
@@ -28,8 +30,13 @@ public class CourseDetailsWindow extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTable table;
+	private JTextArea textArea;
+	
 
-	public CourseDetailsWindow(Course course, Student student) {
+
+	public CourseDetailsWindow(Course course, Student student) throws Exception {
+		this.student = student;
+		this.course = course;
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 524, 352);
@@ -66,14 +73,14 @@ public class CourseDetailsWindow extends JFrame {
 		contentPane.add(table);
 		
 		JLabel title = new JLabel(course.getName());
-		title.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		title.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		title.setHorizontalAlignment(SwingConstants.CENTER);
-		title.setBounds(57, 10, 407, 45);
+		title.setBounds(56, 11, 407, 28);
 		contentPane.add(title);
 		
 		JButton registerBtn = new JButton("Register");
 		registerBtn.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		registerBtn.setBounds(369, 253, 119, 39);
+		registerBtn.setBounds(271, 253, 105, 28);
 		contentPane.add(registerBtn);
 		registerBtn.addMouseListener(new MouseAdapter() {
 			@Override
@@ -88,6 +95,24 @@ public class CourseDetailsWindow extends JFrame {
 				}
 			}
 		});
+			
+		JButton btnDropButton = new JButton("Drop Course");
+		btnDropButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int confirm = JOptionPane.showConfirmDialog(null, "Do you want to drop out from this course?");
+				if (confirm == 0) {
+					try {
+						StudentEnrollmentInCourse.dropStudentFromCourse(course, student);
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+				}
+			}
+		});
+		btnDropButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnDropButton.setBounds(395, 253, 105, 28);
+		contentPane.add(btnDropButton);
 		
 		JButton viewFeedbacksBtn = new JButton("View feedbacks");
 		viewFeedbacksBtn.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -103,10 +128,10 @@ public class CourseDetailsWindow extends JFrame {
 				}
 			}
 		});
-		
+				
 		JButton leaveFeedbackBtn = new JButton("Leave feedback");
 		leaveFeedbackBtn.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		leaveFeedbackBtn.setBounds(188, 253, 128, 39);
+		leaveFeedbackBtn.setBounds(135, 253, 113, 28);
 		contentPane.add(leaveFeedbackBtn);
 		leaveFeedbackBtn.addMouseListener(new MouseAdapter() {
 			@Override
@@ -130,18 +155,25 @@ public class CourseDetailsWindow extends JFrame {
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lblNewLabel.setBounds(20, 302, 406, 13);
 		contentPane.add(lblNewLabel);
-		
-		JLabel descriptionPanel = new JLabel(course.getDescription());
-		descriptionPanel.setBounds(50, 65, 417, 39);
-		contentPane.add(descriptionPanel);
-
-	}
-	  public static void viewFeedbacks(Course course) throws Exception {
-
-	        ArrayList<Feedback> feedbacks = Feedback.getFeedbacks(course);
 	
-	        SwingUtilities.invokeLater(() -> {
-	            new ViewFeedbacksWindow(feedbacks);
-	        });
-	    }
+        textArea = new JTextArea(course.getDescription());
+        textArea.setBounds(10, 42, 490, 61);
+        textArea.setEditable(false);
+
+        textArea.setLineWrap(true);
+        textArea.setWrapStyleWord(true);
+
+        JScrollPane scrollPane = new JScrollPane(textArea);
+        scrollPane.setBounds(10, 42, 490, 61);
+        contentPane.add(scrollPane);
+	}
+	
+	public static void viewFeedbacks(Course course) throws Exception {
+
+        ArrayList<Feedback> feedbacks = Feedback.getFeedbacks(course);
+
+        SwingUtilities.invokeLater(() -> {
+            new ViewFeedbacksWindow(feedbacks);
+        });
+    }
 }
