@@ -1,14 +1,9 @@
 package presentation;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
+import java.awt.*;
+
+import java.awt.event.*;
+import javax.swing.*;
 import student.StudentRegistration;
 
 public class RegistrationWindow extends JFrame {
@@ -31,39 +26,39 @@ public class RegistrationWindow extends JFrame {
 
 	public RegistrationWindow() {
 
-		this.add(b1);
+		getContentPane().add(b1);
 		b1.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		b1.setBounds(127, 300, 131, 39);
 
-		this.add(l1);
+		getContentPane().add(l1);
 		l1.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		l1.setBounds(75, 110, 100, 35);
-		this.add(name);
+		getContentPane().add(name);
 		name.setBounds(200, 110, 150, 35);
 
-		this.add(l2);
+		getContentPane().add(l2);
 		l2.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		l2.setBounds(75, 150, 150, 35);
-		this.add(email);
+		getContentPane().add(email);
 		email.setBounds(200, 150, 150, 35);
 
-		this.add(l3);
+		getContentPane().add(l3);
 		l3.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		l3.setBounds(75, 190, 100, 35);
-		this.add(pass);
+		getContentPane().add(pass);
 		pass.setBounds(200, 190, 150, 35);
 
-		this.add(l4);
+		getContentPane().add(l4);
 		l4.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		l4.setBounds(75, 230, 150, 35);
-		this.add(cpass);
+		getContentPane().add(cpass);
 		cpass.setBounds(200, 230, 150, 35);
 
-		this.add(l);
-		l.setFont(new Font("Tahoma", Font.PLAIN, 45));
+		getContentPane().add(l);
+		l.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		l.setBounds(25, 10, 351, 61);
 
-		this.add(emptyfield);
+		getContentPane().add(emptyfield);
 		emptyfield.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		emptyfield.setBounds(139, 270, 250, 35);
 		emptyfield.setForeground(Color.blue);
@@ -71,7 +66,7 @@ public class RegistrationWindow extends JFrame {
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(400, 450);
-		this.setLayout(null);
+		getContentPane().setLayout(null);
 		this.setVisible(true);
 
 		b1.addActionListener(actionEvent -> {
@@ -126,4 +121,5 @@ public class RegistrationWindow extends JFrame {
 			}
 		});
 	}
+
 }

@@ -11,6 +11,7 @@ import java.util.regex.Pattern;
 
 import course.Course;
 import exceptionHandler.*;
+import security.PasswordHash;
 import student.Student;
 
 public class StudentData {
@@ -19,27 +20,23 @@ public class StudentData {
 	private static int studentID;
 
 	public static boolean loginStudent(int userID, char[] b) throws Exception {
+		boolean validate = false;
 
-		final Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test?useSSl=false", "root", "");
+		final Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/test?useSSl=false",
+				"root", "");
+		PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM users where id = '" 
+				+ userID + "'");
+		ResultSet resultSet = preparedStatement.executeQuery();
+		resultSet.next();
 
-		final String sql = "select * from users where id = '" + userID + "' and password = '" + getpass(b) + "'";
-		final String sql2 = "select name from users where id = '" + userID + "'";
-		final PreparedStatement stm = con.prepareStatement(sql);
-		if (stm.executeQuery(sql).next()) {
-			final ResultSet rs = stm.executeQuery(sql2);
-			if (rs.next())
-				setUsername(rs.getString("name"));
-			con.close();
-			return true;
-		} else {
-			con.close();
-			return false;
-		}
+		setUsername(resultSet.getString("name"));
+		String hashedPassword = resultSet.getString("password");
+		validate = PasswordHash.validatePassword(getpass(b), hashedPassword);
 
+		return validate;
 	}
 
 	public static boolean addNewUser(String name, char[] p, char[] cp, String email) throws Exception {
-
 		if (getpass(p).equals(getpass(cp))) {
 
 			if (name.length() == 0 | (getpass(cp).length() == 0 & getpass(p).length() == 0))
@@ -48,21 +45,22 @@ public class StudentData {
 				throw new EmailException();
 			if(!isValidPassword(getpass(p)))
 				throw new PasswordException();
-			final Connection con2 = DriverManager.getConnection("jdbc:mysql://localhost:3306/test?useSSl=false", "root",
+			
+			final Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/test?useSSl=false", "root",
 					"");
 			int r;
 			do {
 				Random random = new Random();
 				studentID = random.nextInt(888888) + 111111;
-				final String sql3 = "insert into users values(?,?,?,?)";
-				final PreparedStatement stm2 = con2.prepareStatement(sql3);
-				stm2.setInt(1, studentID);
-				stm2.setString(2, getpass(p));
-				stm2.setString(3, name);
-				stm2.setString(4, email);
-				r = stm2.executeUpdate();
+				final String sql = "insert into users values(?,?,?,?)";
+				final PreparedStatement statement = connection.prepareStatement(sql);
+				statement.setInt(1, studentID);
+				statement.setString(2, PasswordHash.createHash(getpass(p)));
+				statement.setString(3, name);
+				statement.setString(4, email);
+				r = statement.executeUpdate();
 			} while (r == 0);
-			con2.close();
+			connection.close();
 			return true;
 		} else
 			return false;
@@ -107,7 +105,7 @@ public class StudentData {
 		final Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test?useSSl=false", "root", "");
 		int r;
 		do {
-			final String sql = "INSERT INTO courses VALUES(?,?,?,?,?,?,?,?,?)";
+			final String sql = "INSERT INTO courses VALUES(?,?,?,?,?,?,?,?,?,?)";
 			final PreparedStatement preparedStatement = con.prepareStatement(sql);
 			preparedStatement.setInt(1, 0);
 			preparedStatement.setString(2, course.getName());
@@ -116,8 +114,9 @@ public class StudentData {
 			preparedStatement.setString(5, course.getLocation());
 			preparedStatement.setInt(6, course.getNumberOfStudents() + 1);
 			preparedStatement.setDouble(7, course.getAverageRate());
-			preparedStatement.setString(8, course.getDescription());
-			preparedStatement.setInt(9, studentId);
+			preparedStatement.setInt(8, course.getNumberOfRates());
+			preparedStatement.setString(9, course.getDescription());
+			preparedStatement.setInt(10, studentId);
 			r = preparedStatement.executeUpdate();
 		} while (r == 0);
 		final String sql = "UPDATE courses SET studentNo= '" + (course.getNumberOfStudents() + 1) + "' WHERE name='"

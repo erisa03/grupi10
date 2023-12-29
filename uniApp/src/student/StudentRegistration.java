@@ -1,6 +1,8 @@
 package student;
 
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
+
 import javax.swing.JOptionPane;
 import data.StudentData;
 import exceptionHandler.*;
@@ -18,7 +20,12 @@ public class StudentRegistration {
 				JOptionPane.showMessageDialog(null, "Enter password correctly");
 				new RegistrationWindow();
 			}
-		} catch (SQLException ex) {
+		} catch(SQLIntegrityConstraintViolationException ex) {
+
+			JOptionPane.showMessageDialog(null,"A user is already associated with given email\nTry with a different email");
+			new RegistrationWindow();
+
+		}catch (SQLException ex) {
 
 			JOptionPane.showMessageDialog(null, "Something went wrong with your SQL connection");
 			ex.printStackTrace();

@@ -35,8 +35,6 @@ public class CourseDetailsWindow extends JFrame {
 
 
 	public CourseDetailsWindow(Course course, Student student) throws Exception {
-		this.student = student;
-		this.course = course;
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 524, 352);

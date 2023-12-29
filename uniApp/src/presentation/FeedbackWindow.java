@@ -114,7 +114,11 @@ public class FeedbackWindow extends JFrame {
 					e1.printStackTrace();
 				} catch (Exception e1) {
 					dispose();
-					new CourseDetailsWindow(course, student);
+					try {
+						new CourseDetailsWindow(course, student);
+					} catch (Exception e2) {
+						e2.printStackTrace();
+					}
 				}
 
 			} else {
@@ -130,7 +134,11 @@ public class FeedbackWindow extends JFrame {
 		cancelButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new CourseDetailsWindow(course, student);
+				try {
+					new CourseDetailsWindow(course, student);
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
 				dispose();
 			}
 		});
