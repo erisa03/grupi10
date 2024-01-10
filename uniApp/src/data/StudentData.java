@@ -105,7 +105,7 @@ public class StudentData {
 		final Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test?useSSl=false", "root", "");
 		int r;
 		do {
-			final String sql = "INSERT INTO courses VALUES(?,?,?,?,?,?,?,?,?,?)";
+			final String sql = "INSERT INTO courses VALUES(?,?,?,?,?,?,?,?,?)";
 			final PreparedStatement preparedStatement = con.prepareStatement(sql);
 			preparedStatement.setInt(1, 0);
 			preparedStatement.setString(2, course.getName());
@@ -114,9 +114,8 @@ public class StudentData {
 			preparedStatement.setString(5, course.getLocation());
 			preparedStatement.setInt(6, course.getNumberOfStudents() + 1);
 			preparedStatement.setDouble(7, course.getAverageRate());
-			preparedStatement.setInt(8, course.getNumberOfRates());
-			preparedStatement.setString(9, course.getDescription());
-			preparedStatement.setInt(10, studentId);
+			preparedStatement.setString(8, course.getDescription());
+			preparedStatement.setInt(9, studentId);
 			r = preparedStatement.executeUpdate();
 		} while (r == 0);
 		final String sql = "UPDATE courses SET studentNo= '" + (course.getNumberOfStudents() + 1) + "' WHERE name='"

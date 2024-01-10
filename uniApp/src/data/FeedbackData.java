@@ -27,9 +27,6 @@ public class FeedbackData {
 			r = stm.executeUpdate();
 		} while (r == 0);
 		CourseData.saveAverageRate(feedback.getRate(), course);
-		final String query = "UPDATE courses SET numberOfRates = '" + (course.getNumberOfRates() + 1) + "'";
-		final PreparedStatement preparedStatement = con.prepareStatement(query);
-		preparedStatement.executeUpdate();
 		con.close();
 	}
 

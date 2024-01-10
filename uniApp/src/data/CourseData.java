@@ -70,10 +70,22 @@ public class CourseData {
 
 	public static void saveAverageRate(int rate, Course course) throws SQLException {
 		final Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test?useSSl=false", "root", "");
-		double newAverageRate = (course.getAverageRate() * course.getNumberOfRates() + rate) / (course.getNumberOfRates() + 1);
+		double newAverageRate = (course.getAverageRate() * CourseData.totalNumberOfRates(course) + rate) / (CourseData.totalNumberOfRates(course) + 1);
 		final String sql = "UPDATE courses SET rate= '" + newAverageRate + "' WHERE name='" + course.getName() + "'";
 		final PreparedStatement prepStatement = con.prepareStatement(sql);
 		prepStatement.executeUpdate();
 		con.close();
+	}
+	
+	public static int totalNumberOfRates(Course course) throws SQLException {
+		final Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test?useSSl=false", "root", "");
+		String query = "SELECT * FROM feedbacks JOIN courses  ON feedbacks.course_id = " + " courses.id WHERE courses.name = '" + course.getName() + "'";
+		int numberOfFeedbacks = 0;
+		final PreparedStatement preparedStatement = con.prepareStatement(query);
+		ResultSet resultSet = preparedStatement.executeQuery();
+		if (resultSet.next()) {
+			numberOfFeedbacks++ ;
+		}
+		return numberOfFeedbacks;
 	}
 }
