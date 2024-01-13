@@ -54,6 +54,9 @@ public class Course {
 		this.numberOfStudents = numberOfStudents;
 	}
 
+	public ArrayList<Course> getTopRatedCourses() throws SQLException, Exception {
+		return CourseData.getTopRatedCourses();
+	}
 	
 	public ArrayList<Student> getStudents() throws SQLException {
 		CourseData allStudents = new CourseData();

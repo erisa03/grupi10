@@ -25,7 +25,7 @@ public class CoursesWindow extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel computerNetworksDrop;
 	private Student student;
-	
+
 	public CoursesWindow(Student student) throws Exception {
 		this.student = student;
 		setVisible(true);
@@ -64,14 +64,14 @@ public class CoursesWindow extends JFrame {
 		architectureLabel.setFont(new Font("Tahoma", Font.BOLD, 17));
 		architectureLabel.setBounds(211, 61, 208, 17);
 		computerNetworksDrop.add(architectureLabel);
-		
+
 		JLabel lblKompjuteri = new JLabel("Architecture");
 		lblKompjuteri.setHorizontalAlignment(SwingConstants.TRAILING);
 		lblKompjuteri.setForeground(Color.WHITE);
 		lblKompjuteri.setFont(new Font("Tahoma", Font.BOLD, 17));
 		lblKompjuteri.setBounds(211, 87, 208, 17);
 		computerNetworksDrop.add(lblKompjuteri);
-		
+
 		JLabel webLabel = new JLabel("Web");
 		webLabel.setForeground(new Color(255, 255, 255));
 		webLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -120,28 +120,28 @@ public class CoursesWindow extends JFrame {
 		javaLabel.setFont(new Font("Tahoma", Font.BOLD, 17));
 		javaLabel.setBounds(236, 243, 208, 17);
 		computerNetworksDrop.add(javaLabel);
-		
+
 		JLabel lblElectronics = new JLabel("Electronics");
 		lblElectronics.setHorizontalAlignment(SwingConstants.CENTER);
 		lblElectronics.setForeground(Color.WHITE);
 		lblElectronics.setFont(new Font("Tahoma", Font.BOLD, 18));
 		lblElectronics.setBounds(491, 433, 129, 17);
 		computerNetworksDrop.add(lblElectronics);
-		
+
 		JLabel lblAnalysis = new JLabel("Analysis");
 		lblAnalysis.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAnalysis.setForeground(Color.WHITE);
 		lblAnalysis.setFont(new Font("Tahoma", Font.BOLD, 18));
 		lblAnalysis.setBounds(86, 430, 115, 22);
 		computerNetworksDrop.add(lblAnalysis);
-		
+
 		JLabel lblAlgebra = new JLabel("Algebra");
 		lblAlgebra.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAlgebra.setForeground(Color.WHITE);
 		lblAlgebra.setFont(new Font("Tahoma", Font.BOLD, 17));
 		lblAlgebra.setBounds(236, 433, 208, 17);
 		computerNetworksDrop.add(lblAlgebra);
-		
+
 		JLabel lblProbabilitet = new JLabel("Probability");
 		lblProbabilitet.setHorizontalAlignment(SwingConstants.CENTER);
 		lblProbabilitet.setForeground(Color.WHITE);
@@ -188,11 +188,9 @@ public class CoursesWindow extends JFrame {
 		lblNewLabel_2_1.setIcon(new ImageIcon(CoursesWindow.class.getResource("/images/arkitekture.jpg")));
 		lblNewLabel_2_1.setBounds(249, 61, 60, 43);
 		computerNetworksDrop.add(lblNewLabel_2_1);
-		
-		
-		
-		//View details buttons
-		//Rreshti 1
+
+		// View details buttons
+		// Rreshti 1
 		JButton algorithmsBtn = new JButton("View details");
 		algorithmsBtn.setName("Algorithms");
 		algorithmsBtn.setBackground(new Color(255, 255, 255));
@@ -228,9 +226,8 @@ public class CoursesWindow extends JFrame {
 		computerNetworksBtn.setBounds(696, 115, 128, 22);
 		computerNetworksDrop.add(computerNetworksBtn);
 		viewCourseInfo(computerNetworksBtn);
-		
-		
-		//Rreshti 2
+
+		// Rreshti 2
 		JButton physicsBtn = new JButton("View details");
 		physicsBtn.setName("Physics");
 		physicsBtn.setForeground(new Color(0, 0, 0));
@@ -239,7 +236,7 @@ public class CoursesWindow extends JFrame {
 		physicsBtn.setBounds(35, 310, 125, 22);
 		computerNetworksDrop.add(physicsBtn);
 		viewCourseInfo(physicsBtn);
-		
+
 		JButton javaBtn = new JButton("View details");
 		javaBtn.setName("Java");
 		javaBtn.setForeground(Color.BLACK);
@@ -248,7 +245,7 @@ public class CoursesWindow extends JFrame {
 		javaBtn.setBounds(269, 312, 125, 22);
 		computerNetworksDrop.add(javaBtn);
 		viewCourseInfo(javaBtn);
-		
+
 		JButton webBtn = new JButton("View details");
 		webBtn.setName("Web");
 		webBtn.setForeground(Color.BLACK);
@@ -257,7 +254,7 @@ public class CoursesWindow extends JFrame {
 		webBtn.setBounds(481, 312, 125, 22);
 		computerNetworksDrop.add(webBtn);
 		viewCourseInfo(webBtn);
-		
+
 		JButton signalsBtn = new JButton("View details");
 		signalsBtn.setName("SignalAndSystems");
 		signalsBtn.setForeground(Color.BLACK);
@@ -266,9 +263,8 @@ public class CoursesWindow extends JFrame {
 		signalsBtn.setBounds(699, 312, 125, 22);
 		computerNetworksDrop.add(signalsBtn);
 		viewCourseInfo(signalsBtn);
-		
-		
-		//Rreshti 3
+
+		// Rreshti 3
 		JButton analysisBtn = new JButton("View details");
 		analysisBtn.setName("Analysis");
 		analysisBtn.setForeground(Color.BLACK);
@@ -277,7 +273,7 @@ public class CoursesWindow extends JFrame {
 		analysisBtn.setBounds(35, 500, 125, 22);
 		computerNetworksDrop.add(analysisBtn);
 		viewCourseInfo(analysisBtn);
-		
+
 		JButton algebraBtn = new JButton("View details");
 		algebraBtn.setName("Algebra");
 		algebraBtn.setForeground(Color.BLACK);
@@ -286,7 +282,7 @@ public class CoursesWindow extends JFrame {
 		algebraBtn.setBounds(269, 502, 125, 22);
 		computerNetworksDrop.add(algebraBtn);
 		viewCourseInfo(algebraBtn);
-		
+
 		JButton electronicsBtn = new JButton("View details");
 		electronicsBtn.setName("Electronics");
 		electronicsBtn.setForeground(Color.BLACK);
@@ -295,7 +291,7 @@ public class CoursesWindow extends JFrame {
 		electronicsBtn.setBounds(481, 502, 125, 22);
 		computerNetworksDrop.add(electronicsBtn);
 		viewCourseInfo(electronicsBtn);
-		
+
 		JButton probabilityBtn = new JButton("View details");
 		probabilityBtn.setName("Probability");
 		probabilityBtn.setForeground(Color.BLACK);
@@ -304,31 +300,30 @@ public class CoursesWindow extends JFrame {
 		probabilityBtn.setBounds(699, 502, 125, 22);
 		computerNetworksDrop.add(probabilityBtn);
 		viewCourseInfo(probabilityBtn);
-		
-		
-		//Registration Buttons
-		//Rreshti 1
+
+		// Registration Buttons
+		// Rreshti 1
 		JButton algorithmsReg = new JButton("Register");
 		algorithmsReg.setName("Algorithms");
 		algorithmsReg.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		algorithmsReg.setBounds(35, 148, 125, 23);
 		computerNetworksDrop.add(algorithmsReg);
 		registerStudent(algorithmsReg, new Course("Algorithms"));
-		
+
 		JButton architectureReg = new JButton("Register");
 		architectureReg.setName("Computer architecture");
 		architectureReg.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		architectureReg.setBounds(269, 148, 125, 23);
 		computerNetworksDrop.add(architectureReg);
 		registerStudent(architectureReg, new Course("Computer architecture"));
-		
+
 		JButton automationReg = new JButton("Register");
 		automationReg.setName("Automation");
 		automationReg.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		automationReg.setBounds(481, 148, 125, 23);
 		computerNetworksDrop.add(automationReg);
 		registerStudent(automationReg, new Course("Automation"));
-				
+
 		JButton computerNetworksReg = new JButton("Register");
 		computerNetworksReg.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -340,8 +335,7 @@ public class CoursesWindow extends JFrame {
 		computerNetworksDrop.add(computerNetworksReg);
 		registerStudent(computerNetworksReg, new Course("Computer Networks"));
 
-		
-		//Rreshti 2
+		// Rreshti 2
 		JButton physicsReg = new JButton("Register");
 		physicsReg.setName("Physics");
 		physicsReg.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -370,7 +364,7 @@ public class CoursesWindow extends JFrame {
 		computerNetworksDrop.add(signalsReg);
 		registerStudent(signalsReg, new Course("SignalAndSystems"));
 
-		//Rreshti 3
+		// Rreshti 3
 		JButton analysisReg = new JButton("Register");
 		analysisReg.setName("Analysis");
 		analysisReg.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -399,110 +393,119 @@ public class CoursesWindow extends JFrame {
 		computerNetworksDrop.add(probabilityReg);
 		registerStudent(probabilityReg, new Course("Probability"));
 
-		
-		//Drop course buttons
-		//Rreshti 1
+		// Drop course buttons
+		// Rreshti 1
 		JButton algorithmsDrop = new JButton("Drop Course");
 		algorithmsDrop.setName("Algorithms");
 		algorithmsDrop.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		algorithmsDrop.setBounds(33, 182, 127, 23);
 		computerNetworksDrop.add(algorithmsDrop);
 		dropStudent(algorithmsDrop, new Course("Algorithms"));
-		
+
 		JButton architectureDrop = new JButton("Drop Course");
 		architectureDrop.setName("Computer architecture");
 		architectureDrop.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		architectureDrop.setBounds(269, 184, 127, 23);
 		computerNetworksDrop.add(architectureDrop);
 		dropStudent(architectureDrop, new Course("Computer architecture"));
-		
+
 		JButton automationDrop = new JButton("Drop Course");
 		automationDrop.setName("Automation");
 		automationDrop.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		automationDrop.setBounds(481, 184, 127, 23);
 		computerNetworksDrop.add(automationDrop);
 		dropStudent(automationDrop, new Course("Automation"));
-		
+
 		JButton algorithmsDrop_3 = new JButton("Drop Course");
 		algorithmsDrop_3.setName("Computer Networks");
 		algorithmsDrop_3.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		algorithmsDrop_3.setBounds(697, 184, 127, 23);
 		computerNetworksDrop.add(algorithmsDrop_3);
 		dropStudent(algorithmsDrop_3, new Course("Computer Networks"));
-		
-		
-		//Rreshti 2
+
+		// Rreshti 2
 		JButton physicsDrop = new JButton("Drop Course");
 		physicsDrop.setName("Physics");
 		physicsDrop.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		physicsDrop.setBounds(35, 377, 127, 23);
 		computerNetworksDrop.add(physicsDrop);
 		dropStudent(physicsDrop, new Course("Physics"));
-		
+
 		JButton javaDrop = new JButton("Drop Course");
 		javaDrop.setName("Java");
 		javaDrop.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		javaDrop.setBounds(267, 379, 127, 23);
 		computerNetworksDrop.add(javaDrop);
 		dropStudent(javaDrop, new Course("Java"));
-		
+
 		JButton webDrop = new JButton("Drop Course");
 		webDrop.setName("Web");
 		webDrop.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		webDrop.setBounds(481, 379, 127, 23);
 		computerNetworksDrop.add(webDrop);
 		dropStudent(webDrop, new Course("Web"));
-		
+
 		JButton signalsDrop = new JButton("Drop Course");
 		signalsDrop.setName("SignalAndSystems");
 		signalsDrop.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		signalsDrop.setBounds(697, 379, 127, 23);
 		computerNetworksDrop.add(signalsDrop);
 		dropStudent(signalsDrop, new Course("SignalsAndSystems"));
-		
-		//Rreshti 3
+
+		// Rreshti 3
 		JButton analysisDrop = new JButton("Drop Course");
 		analysisDrop.setName("Analysis");
 		analysisDrop.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		analysisDrop.setBounds(35, 567, 127, 23);
 		computerNetworksDrop.add(analysisDrop);
 		dropStudent(analysisDrop, new Course("Analysis"));
-		
+
 		JButton algebraDrop = new JButton("Drop Course");
 		algebraDrop.setName("Algebra");
 		algebraDrop.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		algebraDrop.setBounds(267, 569, 127, 23);
 		computerNetworksDrop.add(algebraDrop);
 		dropStudent(algebraDrop, new Course("Algebra"));
-		
+
 		JButton electronicDrop = new JButton("Drop Course");
 		electronicDrop.setName("Electronics");
 		electronicDrop.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		electronicDrop.setBounds(481, 569, 127, 23);
 		computerNetworksDrop.add(electronicDrop);
 		dropStudent(electronicDrop, new Course("Electonics"));
-		
+
 		JButton probabilityDrop = new JButton("Drop Course");
 		probabilityDrop.setName("Probability");
 		probabilityDrop.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		probabilityDrop.setBounds(697, 569, 127, 23);
 		computerNetworksDrop.add(probabilityDrop);
 		dropStudent(probabilityDrop, new Course("Probability"));
-		
+
 		JLabel lblFundamentals = new JLabel("Fundamentals");
 		lblFundamentals.setHorizontalAlignment(SwingConstants.TRAILING);
 		lblFundamentals.setForeground(Color.WHITE);
 		lblFundamentals.setFont(new Font("Tahoma", Font.BOLD, 17));
 		lblFundamentals.setBounds(431, 254, 208, 17);
 		computerNetworksDrop.add(lblFundamentals);
-		
+
 		JLabel lblSystems = new JLabel("Systems");
 		lblSystems.setHorizontalAlignment(SwingConstants.TRAILING);
 		lblSystems.setForeground(Color.WHITE);
 		lblSystems.setFont(new Font("Tahoma", Font.BOLD, 17));
 		lblSystems.setBounds(626, 259, 208, 17);
 		computerNetworksDrop.add(lblSystems);
-		
+
+		JButton topCourses = new JButton("View top rated courses");
+		topCourses.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		topCourses.setBounds(339, 602, 193, 37);
+		computerNetworksDrop.add(topCourses);
+		topCourses.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				new FavouriteCoursesWindow();
+			}
+		});
+
 	}
 
 	private void viewCourseInfo(JButton courseButton) {
@@ -516,40 +519,40 @@ public class CoursesWindow extends JFrame {
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
-				
+
 			}
 		});
 	}
-	
+
 	private void registerStudent(JButton registerButton, Course course) {
-	    registerButton.addMouseListener(new MouseAdapter() {
-	        @Override
-	        public void mouseClicked(MouseEvent e) {
-	            int confirm = JOptionPane.showConfirmDialog(null, "Do you want to register in this course?");
-	            if (confirm == 0) {
-	                try {
-	                    StudentEnrollmentInCourse.enrollStudentInCourse(course, student);
-	                } catch (SQLException e1) {
-	                    e1.printStackTrace();
-	                }
-	            }
-	        }
-	    });
+		registerButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int confirm = JOptionPane.showConfirmDialog(null, "Do you want to register in this course?");
+				if (confirm == 0) {
+					try {
+						StudentEnrollmentInCourse.enrollStudentInCourse(course, student);
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+				}
+			}
+		});
 	}
 
 	private void dropStudent(JButton dropButton, Course course) {
-	    dropButton.addMouseListener(new MouseAdapter() {
-	        @Override
-	        public void mouseClicked(MouseEvent e) {
-	            int confirm = JOptionPane.showConfirmDialog(null, "Do you want to drop out from this course?");
-	            if (confirm == 0) {
-	                try {
-	                    StudentEnrollmentInCourse.dropStudentFromCourse(course, student);
-	                } catch (SQLException e1) {
-	                    e1.printStackTrace();
-	                }
-	            }
-	        }
-	    });
+		dropButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int confirm = JOptionPane.showConfirmDialog(null, "Do you want to drop out from this course?");
+				if (confirm == 0) {
+					try {
+						StudentEnrollmentInCourse.dropStudentFromCourse(course, student);
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+				}
+			}
+		});
 	}
 }
