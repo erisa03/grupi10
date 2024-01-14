@@ -129,14 +129,9 @@ public class StudentData {
 
 		int StudentId = StudentData.getStudentID(student);
 		
-		if ( !isEnrolled ( student, course)) {
-			System.out.println("You are not enrolled in this course!");
-			return;
-		}
-		
 		final Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test?useSSl=false", "root", "");
 		try  {
-			String sql = "DELETE FROM courses WHERE user_id = ? AND name = ?";
+			String sql = "UPDATE courses SET user_id = NULL WHERE user_id = ? AND name = ?";
 			try (PreparedStatement deleteStatement = con.prepareStatement(sql)) {
 				deleteStatement.setInt(1, StudentId);
 				deleteStatement.setString(2, course.getName());
@@ -145,11 +140,7 @@ public class StudentData {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-//		final String sql = "UPDATE courses SET studentNo= '" + (course.getNumberOfStudents() - 1) + "' WHERE name='"
-//				+ course.getName() + "'";
-//		final PreparedStatement preparedStatement = con.prepareStatement(sql);
-//		preparedStatement.executeUpdate();
-//		con.close();
+
 		int newStudentNo = course.getNumberOfStudents() - 1;
 		final String sql = "UPDATE courses SET studentNo= ? WHERE name= ?";
 		final PreparedStatement preparedStatement = con.prepareStatement(sql);
