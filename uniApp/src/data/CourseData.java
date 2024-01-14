@@ -104,4 +104,20 @@ public class CourseData {
 		}
 		return courses;
 	}
+
+	public static ArrayList<Course> getAllCourses() throws SQLException, Exception {
+		final Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test?useSSl=false", "root", "");
+
+		String query = "SELECT DISTINCT name FROM courses";
+
+		PreparedStatement stm = con.prepareStatement(query);
+		ResultSet resultSet = stm.executeQuery();
+		ArrayList<Course> courses = new ArrayList<>();
+		while (resultSet.next()) {
+			String name = resultSet.getString("name");		
+			Course course = new Course(name);
+			courses.add(course);
+		}
+		return courses;	
+	}
 }

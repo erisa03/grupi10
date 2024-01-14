@@ -58,6 +58,10 @@ public class Course {
 		return CourseData.getTopRatedCourses();
 	}
 	
+	public ArrayList<Course> getAllCourses() throws SQLException, Exception {
+		return CourseData.getAllCourses();
+	}
+	
 	public ArrayList<Student> getStudents() throws SQLException {
 		CourseData allStudents = new CourseData();
 		return allStudents.getStudentsByCourseName(name);

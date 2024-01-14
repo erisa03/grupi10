@@ -506,6 +506,17 @@ public class CoursesWindow extends JFrame {
 			}
 		});
 
+		JButton scheduleBtn = new JButton("Schedule");
+		scheduleBtn.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		scheduleBtn.setBounds(134, 602, 193, 37);
+		computerNetworksDrop.add(scheduleBtn);
+		scheduleBtn.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				new CalendarWindow();
+			}
+		});
+
 	}
 
 	private void viewCourseInfo(JButton courseButton) {
