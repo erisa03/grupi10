@@ -10,7 +10,6 @@ import course.Course;
 import student.Student;
 
 public class CourseData {
-    private ArrayList<Student> students;
 
 	public static Course getCourseByName(String courseName) throws SQLException, Exception {
 
@@ -26,30 +25,15 @@ public class CourseData {
 			course.setLecturer(resultSet.getString("lecturer"));
 			course.setAverageRate(resultSet.getDouble("rate"));
 			course.setNumberOfStudents(resultSet.getInt("studentNo"));
+			course.setMaxStudentNumber(resultSet.getInt("maxStudentNo"));
 			course.setLocation(resultSet.getString("location"));
 			course.setTime(resultSet.getTime("times"));
 		}
 		return course;
 	}
 
-	public ArrayList<Student> getStudentsByCourseName(String courseName) throws SQLException {
-
-		students = new ArrayList<Student>();
-		Student student = new Student();
-		String query = "SELECT * FROM courses WHERE name = ?";
-		final Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test?useSSl=false", "root", "");
-		PreparedStatement statement = con.prepareStatement(query);
-		statement.setString(1, courseName);
-		ResultSet resultSet = statement.executeQuery();
-		if (resultSet.next()) {
-			student = StudentData.getStudentByID(resultSet.getString("user_id"));
-			students.add(student);
-		}
-		return students;
-	}
-
 	public boolean isAvailabe(Course course) {
-		if (course.getNumberOfStudents() < course.MAX_STUDENTS) {
+		if (course.getNumberOfStudents() < course.getMaxStudentNumber()) {
 			return true;
 		} else
 			return false;
@@ -104,7 +88,7 @@ public class CourseData {
 		}
 		return courses;
 	}
-
+	
 	public static ArrayList<Course> getAllCourses() throws SQLException, Exception {
 		final Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test?useSSl=false", "root", "");
 

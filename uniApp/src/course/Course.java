@@ -5,14 +5,13 @@ import java.sql.Time;
 import java.util.ArrayList;
 
 import data.CourseData;
-import student.Student;
 
 public class Course {
-    public final int MAX_STUDENTS = 20;
 	private String name;
 	private String lecturer;
 	private String description;
 	private int numberOfStudents;
+	private int maxStudentNumber;
 	private double averageRate;
 	private String location;
 	private Time time;
@@ -25,6 +24,7 @@ public class Course {
 		this.lecturer = course.getLecturer();
 		this.description = course.getDescription();
 		this.numberOfStudents = course.getNumberOfStudents();
+		this.maxStudentNumber = course.getMaxStudentNumber();
 		this.averageRate = course.getAverageRate();
 		this.location = course.getLocation();
 		this.time = course.getTime();
@@ -60,11 +60,6 @@ public class Course {
 	
 	public ArrayList<Course> getAllCourses() throws SQLException, Exception {
 		return CourseData.getAllCourses();
-	}
-	
-	public ArrayList<Student> getStudents() throws SQLException {
-		CourseData allStudents = new CourseData();
-		return allStudents.getStudentsByCourseName(name);
 	}
 
 	public String getLecturer() {
@@ -108,6 +103,14 @@ public class Course {
 
 	public boolean isAvailable() {
 		return new CourseData().isAvailabe(this);
+	}
+
+	public int getMaxStudentNumber() {
+		return maxStudentNumber;
+	}
+
+	public void setMaxStudentNumber(int maxStudentNumber) {
+		this.maxStudentNumber = maxStudentNumber;
 	}
 	
 }

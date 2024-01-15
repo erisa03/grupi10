@@ -4,6 +4,8 @@ package course;
 import java.sql.Date;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import data.*;
 import student.Student;
 
@@ -24,6 +26,14 @@ public class Feedback {
 
 	public static ArrayList<Feedback> getFeedbacks(Course course) throws Exception {
 		return FeedbackData.getFeedbacks(course);
+	}
+
+	public static void removeOldFeedback () {
+		try {
+			FeedbackData.removeOldFeedback();
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Database connection failed!");
+		}
 	}
 
 	public String getFeedbackFromStudent() {

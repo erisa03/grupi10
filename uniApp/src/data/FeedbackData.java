@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import student.Student;
 import course.*;
@@ -59,4 +60,16 @@ public class FeedbackData {
 		return resultSet.next();
 	}
 
+	public static void removeOldFeedback() throws SQLException {
+		try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test?useSSL=false", "root",
+				"")) {
+			String sql = "DELETE FROM feedbacks WHERE date < ?";
+			try (PreparedStatement stm = con.prepareStatement(sql)) {
+				LocalDate oneYearAgo = LocalDate.now().minusYears(1);
+				Date formattedDate = Date.valueOf(oneYearAgo);
+				stm.setDate(1, formattedDate);
+				stm.executeUpdate();
+			}
+		}
+	}
 }
