@@ -114,7 +114,7 @@ public class CourseDetailsWindow extends JFrame {
 		
 		JButton viewFeedbacksBtn = new JButton("View feedbacks");
 		viewFeedbacksBtn.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		viewFeedbacksBtn.setBounds(21, 253, 119, 39);
+		viewFeedbacksBtn.setBounds(10, 253, 115, 28);
 		contentPane.add(viewFeedbacksBtn);
 		viewFeedbacksBtn.addMouseListener(new MouseAdapter() {
 			@Override
@@ -168,10 +168,10 @@ public class CourseDetailsWindow extends JFrame {
 	
 	public static void viewFeedbacks(Course course) throws Exception {
 
-        ArrayList<Feedback> feedbacks = Feedback.getFeedbacks(course);
+		ArrayList<Feedback> feedbacks = Feedback.getFeedbacks(course);
 
-        SwingUtilities.invokeLater(() -> {
-            new ViewFeedbacksWindow(feedbacks);
-        });
-    }
+		SwingUtilities.invokeLater(() -> {
+			new ViewFeedbacksWindow(feedbacks, course);
+		});
+	}
 }

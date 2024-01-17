@@ -32,17 +32,17 @@ public class StudentRegistration {
 
 		} catch (FieldEntryException ex) {
 
-			JOptionPane.showMessageDialog(null, "Fields can't be empty");
+			JOptionPane.showMessageDialog(null, ex);
 			new RegistrationWindow();
 
 		} catch (EmailException ex) {
 
-			JOptionPane.showMessageDialog(null, "Invalid email");
+			JOptionPane.showMessageDialog(null, ex);
 			new RegistrationWindow();
 
 		} catch (PasswordException ex) {
 			
-			JOptionPane.showMessageDialog(null, "Invalid password");
+			JOptionPane.showMessageDialog(null, ex);
 			new RegistrationWindow();
 
 		} catch (Exception ex) {

@@ -1,8 +1,6 @@
 package student;
 
 import java.sql.SQLException;
-import java.util.Arrays;
-
 import course.Course;
 import data.CourseData;
 import data.FeedbackData;
@@ -11,7 +9,6 @@ import data.StudentData;
 public class Student {
 	private String name;
 	private String email;
-	private Course courses[];
 
 	public Student() {
 	}
@@ -27,7 +24,7 @@ public class Student {
 	}
 	@Override
 	public String toString() {
-		return "Student [name=" + name + ", email=" + email + ", courses=" + Arrays.toString(courses) + "]";
+		return "Student [name=" + name + ", email=" + email + "]";
 	}
 	
 	public String getName() {
@@ -41,11 +38,5 @@ public class Student {
 	}
 	public void setEmail(String email) {
 		this.email = email;
-	}
-	public Course[] getCourses() {
-		return courses;
-	}
-	public void setCourses(Course[] courses) {
-		this.courses = courses;
 	}
 }

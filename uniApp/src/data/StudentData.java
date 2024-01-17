@@ -22,7 +22,7 @@ public class StudentData {
 	public static boolean loginStudent(int userID, char[] b) throws Exception {
 		boolean validate = false;
 
-		final Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/test?useSSl=false",
+		final Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/rate_university_application?useSSl=false",
 				"root", "");
 		PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM users where id = '" 
 				+ userID + "'");
@@ -46,7 +46,7 @@ public class StudentData {
 			if(!isValidPassword(getpass(p)))
 				throw new PasswordException();
 			
-			final Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/test?useSSl=false", "root",
+			final Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/rate_university_application?useSSl=false", "root",
 					"");
 			int r;
 			do {
@@ -70,7 +70,7 @@ public class StudentData {
 
 		String query = "SELECT * FROM users WHERE name = ?";
 		Student student = new Student();
-		final Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test?useSSl=false", "root", "");
+		final Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/rate_university_application?useSSl=false", "root", "");
 		PreparedStatement statement = con.prepareStatement(query);
 		statement.setString(1, name);
 		ResultSet resultSet = statement.executeQuery();
@@ -86,7 +86,7 @@ public class StudentData {
 
 		String query = "SELECT * FROM users WHERE id = ?";
 		Student student = new Student();
-		final Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test?useSSl=false", "root", "");
+		final Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/rate_university_application?useSSl=false", "root", "");
 		PreparedStatement statement = con.prepareStatement(query);
 		statement.setString(1, userID);
 		try (ResultSet resultSet = statement.executeQuery()) {
@@ -102,10 +102,10 @@ public class StudentData {
 	public static void addStudentInCourse(Course course, Student student) throws SQLException {
 		
 		int studentId = StudentData.getStudentID(student);
-		final Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test?useSSl=false", "root", "");
+		final Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/rate_university_application?useSSl=false", "root", "");
 		int r;
 		do {
-			final String sql = "INSERT INTO courses VALUES(?,?,?,?,?,?,?,?,?)";
+			final String sql = "INSERT INTO courses VALUES(?,?,?,?,?,?,?,?,?,?)";
 			final PreparedStatement preparedStatement = con.prepareStatement(sql);
 			preparedStatement.setInt(1, 0);
 			preparedStatement.setString(2, course.getName());
@@ -113,9 +113,10 @@ public class StudentData {
 			preparedStatement.setTime(4, course.getTime());
 			preparedStatement.setString(5, course.getLocation());
 			preparedStatement.setInt(6, course.getNumberOfStudents() + 1);
-			preparedStatement.setDouble(7, course.getAverageRate());
-			preparedStatement.setString(8, course.getDescription());
-			preparedStatement.setInt(9, studentId);
+			preparedStatement.setInt(7, course.getMaxStudentNumber());
+			preparedStatement.setDouble(8, course.getAverageRate());
+			preparedStatement.setString(9, course.getDescription());
+			preparedStatement.setInt(10, studentId);
 			r = preparedStatement.executeUpdate();
 		} while (r == 0);
 		final String sql = "UPDATE courses SET studentNo= '" + (course.getNumberOfStudents() + 1) + "' WHERE name='"
@@ -129,7 +130,7 @@ public class StudentData {
 
 		int StudentId = StudentData.getStudentID(student);
 		
-		final Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test?useSSl=false", "root", "");
+		final Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/rate_university_application?useSSl=false", "root", "");
 		try  {
 			String sql = "UPDATE courses SET user_id = NULL WHERE user_id = ? AND name = ?";
 			try (PreparedStatement deleteStatement = con.prepareStatement(sql)) {
@@ -153,7 +154,7 @@ public class StudentData {
 	public static int getStudentID(Student student) throws SQLException {
 		
 		String query = "SELECT * FROM users WHERE name = '" + student.getName() + "'";
-		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test?useSSl=false", "root", "");
+		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/rate_university_application?useSSl=false", "root", "");
 		int studentID = 0;
 		PreparedStatement preparedStatement = con.prepareStatement(query);
 		ResultSet resultSet = preparedStatement.executeQuery();
@@ -168,7 +169,7 @@ public class StudentData {
 		
 		String query = "SELECT * FROM courses WHERE user_id = '" + StudentData.getStudentID(student) + "' AND name= '"
 				+ course.getName() + "'";
-		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test?useSSl=false", "root", "");
+		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/rate_university_application?useSSl=false", "root", "");
 		PreparedStatement preparedStatement = con.prepareStatement(query);
 		ResultSet resultSet = preparedStatement.executeQuery();
 		return resultSet.next();

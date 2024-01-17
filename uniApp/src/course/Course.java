@@ -102,7 +102,7 @@ public class Course {
 	}
 
 	public boolean isAvailable() {
-		return new CourseData().isAvailabe(this);
+		return CourseData.isAvailabe(this);
 	}
 
 	public int getMaxStudentNumber() {

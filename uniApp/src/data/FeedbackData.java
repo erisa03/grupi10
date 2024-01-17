@@ -15,7 +15,7 @@ import course.*;
 public class FeedbackData {
 	public static void addFeedback(Feedback feedback, Course course, Student student) throws Exception {
 		int courseID = CourseData.getCourseID(course, student);
-		final Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test?useSSl=false", "root", "");
+		final Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/rate_university_application?useSSl=false", "root", "");
 		int r;
 		do {
 			final String sql = "insert into feedbacks values(?,?,?,?,?)";
@@ -33,7 +33,7 @@ public class FeedbackData {
 
 	public static ArrayList<Feedback> getFeedbacks(Course course) throws Exception {
 		
-		final Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test?useSSl=false", "root", "");
+		final Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/rate_university_application?useSSl=false", "root", "");
 		
 		String query = "SELECT * FROM feedbacks INNER JOIN courses ON feedbacks.course_id = " + " courses.id "
 				+ "WHERE courses.name = '"+course.getName()+"' ORDER BY feedbacks.date DESC";
@@ -54,14 +54,14 @@ public class FeedbackData {
 
 	public static boolean hasLeftFeedback(int courseID) throws SQLException {
 		String query = "SELECT * FROM feedbacks WHERE course_id = '" + courseID + "'";
-		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test?useSSl=false", "root", "");
+		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/rate_university_application?useSSl=false", "root", "");
 		PreparedStatement preparedStatement = con.prepareStatement(query);
 		ResultSet resultSet = preparedStatement.executeQuery();
 		return resultSet.next();
 	}
 
 	public static void removeOldFeedback() throws SQLException {
-		try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test?useSSL=false", "root",
+		try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/rate_university_application?useSSL=false", "root",
 				"")) {
 			String sql = "DELETE FROM feedbacks WHERE date < ?";
 			try (PreparedStatement stm = con.prepareStatement(sql)) {

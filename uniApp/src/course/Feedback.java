@@ -20,6 +20,11 @@ public class Feedback {
 		this.date = date;
 	}
 
+	@Override
+	public String toString() {
+		return "Feedback [feedbackFromStudent=" + feedbackFromStudent + ", rate=" + rate + ", date=" + date + "]";
+	}
+
 	public void addFeedback(Course course, Student student) throws Exception {
 		FeedbackData.addFeedback(this, course, student);
 	}

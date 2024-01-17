@@ -8,9 +8,8 @@ import data.*;
 public class StudentEnrollmentInCourse {
 
 	public static void enrollStudentInCourse(Course course, Student student) throws SQLException {
-		CourseData courseData = new CourseData();
 		try {
-			if (!courseData.isAvailabe(course)) {
+			if (!CourseData.isAvailabe(course)) {
 				JOptionPane.showMessageDialog(null, "You can not register in this course!");
 			} else if (StudentData.isEnrolled(student, course)) {
 				JOptionPane.showMessageDialog(null, "You are already registered!");

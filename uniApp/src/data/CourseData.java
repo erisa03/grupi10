@@ -15,7 +15,7 @@ public class CourseData {
 
 		String query = "SELECT * FROM courses WHERE name = ?";
 		Course course = new Course();
-		final Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test?useSSl=false", "root", "");
+		final Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/rate_university_application?useSSl=false", "root", "");
 		PreparedStatement statement = con.prepareStatement(query);
 		statement.setString(1, courseName);
 		ResultSet resultSet = statement.executeQuery();
@@ -32,7 +32,7 @@ public class CourseData {
 		return course;
 	}
 
-	public boolean isAvailabe(Course course) {
+	public static boolean isAvailabe(Course course) {
 		if (course.getNumberOfStudents() < course.getMaxStudentNumber()) {
 			return true;
 		} else
@@ -40,7 +40,7 @@ public class CourseData {
 	}
 
 	public static int getCourseID(Course course, Student student) throws SQLException {
-		final Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test?useSSl=false", "root", "");
+		final Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/rate_university_application?useSSl=false", "root", "");
 		String query = "SELECT * FROM courses WHERE name = '" + course.getName() + "' AND user_id='" + student.getID()
 				+ "'";
 		int id = 0;
@@ -53,7 +53,7 @@ public class CourseData {
 	}
 
 	public static void saveAverageRate(int rate, Course course) throws SQLException {
-		final Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test?useSSl=false", "root", "");
+		final Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/rate_university_application?useSSl=false", "root", "");
 		double newAverageRate = (course.getAverageRate() * CourseData.totalNumberOfRates(course) + rate) / (CourseData.totalNumberOfRates(course) + 1);
 		final String sql = "UPDATE courses SET rate= '" + newAverageRate + "' WHERE name='" + course.getName() + "'";
 		final PreparedStatement prepStatement = con.prepareStatement(sql);
@@ -62,7 +62,7 @@ public class CourseData {
 	}
 	
 	public static int totalNumberOfRates(Course course) throws SQLException {
-		final Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test?useSSl=false", "root", "");
+		final Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/rate_university_application?useSSl=false", "root", "");
 		String query = "SELECT * FROM feedbacks JOIN courses  ON feedbacks.course_id = " + " courses.id WHERE courses.name = '" + course.getName() + "'";
 		int numberOfFeedbacks = 0;
 		final PreparedStatement preparedStatement = con.prepareStatement(query);
@@ -73,7 +73,7 @@ public class CourseData {
 		return numberOfFeedbacks;
 	}
 	public static ArrayList<Course> getTopRatedCourses() throws SQLException, Exception {
-		final Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test?useSSl=false", "root", "");
+		final Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/rate_university_application?useSSl=false", "root", "");
 
 		String query = "SELECT DISTINCT name FROM courses  ORDER BY rate DESC LIMIT 8";
 
@@ -90,7 +90,7 @@ public class CourseData {
 	}
 	
 	public static ArrayList<Course> getAllCourses() throws SQLException, Exception {
-		final Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test?useSSl=false", "root", "");
+		final Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/rate_university_application?useSSl=false", "root", "");
 
 		String query = "SELECT DISTINCT name FROM courses";
 

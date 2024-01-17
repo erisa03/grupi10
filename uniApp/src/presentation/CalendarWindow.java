@@ -30,7 +30,7 @@ public class CalendarWindow extends JFrame {
 		
 		ArrayList<Course> allCourses = null;
 		try {
-			allCourses = new Course().getTopRatedCourses();
+			allCourses = new Course().getAllCourses();
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Database connection failed!");
 		} catch (Exception e) {
