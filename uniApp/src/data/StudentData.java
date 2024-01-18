@@ -198,7 +198,7 @@ public class StudentData {
 		return stb.toString();
 	}
 	
-	private static boolean isValidPassword(String password) { 
+	public static boolean isValidPassword(String password) { 
         String regex = "^(?=.*[0-9])"
                        + "(?=.*[a-z])(?=.*[A-Z])"
                        + "(?=.*[@#$%^&+=])"
@@ -208,7 +208,7 @@ public class StudentData {
         return m.matches();
     }
 	
-	private static boolean isValidEmail(String emailAddress) {
+	public static boolean isValidEmail(String emailAddress) {
 		String regexPattern = "^(.+)@(\\S+)$";
 	    return Pattern.compile(regexPattern)
 	      .matcher(emailAddress)
