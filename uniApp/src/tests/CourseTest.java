@@ -1,6 +1,7 @@
 package tests;
 
-
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 import java.sql.Connection;
@@ -43,6 +44,19 @@ public class CourseTest {
 	}
 
 	@Test
+	public void testIsAvailable() throws Exception {
+		// Create a test case where the number of students is less than the maximum allowed
+		Course availableCourse = new Course(TEST_COURSE_NAME);
+
+		assertTrue(CourseData.isAvailabe(availableCourse));
+
+		// Create a test case where the number of students is equal to the maximum allowed
+		Course fullCourse = new Course("Computer Networks");
+
+		assertFalse(CourseData.isAvailabe(fullCourse));
+	}
+
+	@Test
 	public void testGetCourseID() throws Exception {
 		// Mocking
 		Connection connectionMock = mock(Connection.class);
@@ -64,6 +78,26 @@ public class CourseTest {
 
 		// Verify that the method correctly extracts the course ID
 		assertEquals(13, result);
+	}
+
+	@Test
+	public void testTotalNumberOfRates() throws Exception {
+		// Mocking
+		Connection connectionMock = mock(Connection.class);
+		PreparedStatement statementMock = mock(PreparedStatement.class);
+		ResultSet resultSetMock = mock(ResultSet.class);
+
+		when(connectionMock.prepareStatement(anyString())).thenReturn(statementMock);
+		when(statementMock.executeQuery()).thenReturn(resultSetMock);
+		when(resultSetMock.next()).thenReturn(true, false);
+		when(resultSetMock.getInt(anyString())).thenReturn(2);
+
+		Whitebox.setInternalState(courseData, "con", connectionMock);
+
+		Course testCourse = new Course("Algorithms");
+		int result = CourseData.totalNumberOfRates(testCourse);
+
+		assertEquals(2, result);
 	}
 
 	@Test
