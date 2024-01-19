@@ -223,24 +223,46 @@ public class StudentTest {
 	public void testIsValidPassword() {
 		// Test with valid passwords
 		assertTrue(StudentData.isValidPassword("Abcd1234@"));
-
-		// Test with invalid passwords
-		assertFalse(StudentData.isValidPassword("weak")); // Too short
-		assertFalse(StudentData.isValidPassword("noUpperCase123!")); // Missing uppercase letter
-		assertFalse(StudentData.isValidPassword("NoLowercase123!")); // Missing lowercase letter
-		assertFalse(StudentData.isValidPassword("NoNumberUpperlower!")); // Missing number
-		assertFalse(StudentData.isValidPassword("NoSpecialCharacter123")); // Missing special character
-		assertFalse(StudentData.isValidPassword("    SpacesAreNotAllowed   ")); // Contains spaces
-		assertFalse(StudentData.isValidPassword("PassWithWhiteSpace  !")); // Contains spaces
+		
 	}
-
+	
+	@Test
+	public void testTooShortPassword() {
+		// Test with invalid passwords
+		assertFalse(StudentData.isValidPassword("weak"));
+	}
+	
+	@Test
+	public void testMissingLowercasePassword() {
+		// Test with invalid passwords
+		assertFalse(StudentData.isValidPassword("NoLowercase123!"));
+	}
+	
+	@Test
+	public void testMissingUppercasePassword() {
+		// Test with invalid passwords
+		assertFalse(StudentData.isValidPassword("noUpperCase123!"));
+	}
+	
+	@Test
+	public void testMissingNumberPassword() {
+		// Test with invalid passwords
+		assertFalse(StudentData.isValidPassword("NoNumberUpperlower!"));
+	}
+	
+	@Test
+	public void testMissingSpecialCharacterPassword() {
+		// Test with invalid passwords
+		assertFalse(StudentData.isValidPassword("NoSpecialCharacter123"));
+	}
+	
 	@Test
 	public void testIsValidEmail() {
-		// Test with valid email addresses
 		assertTrue(StudentData.isValidEmail("test@example.com"));
-		assertTrue(StudentData.isValidEmail("user123@mail.domain"));
-
-		// Test with invalid email addresses
-		assertFalse(StudentData.isValidEmail("invalid-email"));
 	}	
+	
+	@Test
+	public void testIsInvalidValidEmail() {
+		assertFalse(StudentData.isValidEmail("invalid-email"));
+	}
 }

@@ -45,12 +45,13 @@ public class CourseTest {
 
 	@Test
 	public void testIsAvailable() throws Exception {
-		// Create a test case where the number of students is less than the maximum allowed
 		Course availableCourse = new Course(TEST_COURSE_NAME);
-
+		
 		assertTrue(CourseData.isAvailabe(availableCourse));
-
-		// Create a test case where the number of students is equal to the maximum allowed
+	}
+	
+	@Test
+	public void testIsNotAvailable() throws Exception {
 		Course fullCourse = new Course("Computer Networks");
 
 		assertFalse(CourseData.isAvailabe(fullCourse));
